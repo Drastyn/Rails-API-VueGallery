@@ -1,9 +1,9 @@
 class ArchiveSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :name, :token, :path
+  attributes :id, :name, :token, :url
 
-  def path
-    rails_blob_url(object.image) if object.image.attached?
+  def url
+    url_for(object.image) if object.image.attached?
   end
 
 end
