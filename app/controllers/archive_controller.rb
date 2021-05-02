@@ -8,7 +8,6 @@ class ArchiveController < ApplicationController
     render json: @archives
   end
 
-  # GET /archives/:token
   def show
     render json: @archive
   end
@@ -31,7 +30,7 @@ class ArchiveController < ApplicationController
 
   def archive_params_new
     params.require(:archive).permit(:name, :image)
-    .with_defaults(token: Digest::MD5.hexdigest(params[:archive][:name]))
+    .with_defaults(token: Digest::MD5.hexdigest(Time.zone.to_s + params[:archive][:name]))
   end
 
 end
