@@ -1,24 +1,17 @@
-# README
+# API for Vue-Gallery (practice)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup 
 
-Things you may want to cover:
+Use the fllow commands:
 
-* Ruby version
+- rails db:migrate (run migrations)
+- bundle install (install the gems used)
+- rails s (run the serve in port 3000)
+- 
 
-* System dependencies
+Note: 
 
-* Configuration
+    The register is not been created in the vue frontend.
+    You can use postman, for example, to create a new user.
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+    Use bundle exec figaro install (create application.yml for env variables)
