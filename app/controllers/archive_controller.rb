@@ -3,7 +3,7 @@ class ArchiveController < ApplicationController
   before_action :set_archive, only: [:show]
 
   def index
-    @archives = Archive.archive_data.page(params[:page]).per(10).without_count
+    @archives = Archive.archive_data.page(params[:page]).per(8).without_count
     .includes(image_attachment: :blob)
     render json: @archives
   end
