@@ -15,6 +15,10 @@ class Archive < ApplicationRecord
     # Query functions
 
     def self.archive_data
-        self.select(:id, :name, :token, :users_id)
+        self.select(:id, :name, :token)
+    end
+
+    def self.uploaded_by
+        self.select('users.name as user_name').joins(:user)
     end
 end

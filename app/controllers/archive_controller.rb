@@ -9,7 +9,7 @@ class ArchiveController < ApplicationController
   end
 
   def show
-    render json: @archive
+    render json: @archive, serializer: ArchiveShowSerializer
   end
 
   def create
@@ -25,7 +25,7 @@ class ArchiveController < ApplicationController
   private
 
   def set_archive
-    @archive = Archive.archive_data.find_by(token: params[:token])
+    @archive = Archive.archive_data.uploaded_by.find_by(token: params[:token])
   end
 
   def archive_params_new
