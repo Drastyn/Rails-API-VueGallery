@@ -13,7 +13,7 @@ class ArchiveController < ApplicationController
   end
 
   def create
-    @archive = Archive.new(archive_params_new)
+    @archive = current_user.archives.new(archive_params_new)
     
     if @archive.save
       render json: @archive, status: :created

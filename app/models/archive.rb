@@ -1,6 +1,8 @@
 class Archive < ApplicationRecord
     has_one_attached :image
 
+    belongs_to :user, foreign_key: "users_id"
+
     before_save { self.name = name.strip }
     before_save { self.name = name.downcase }
 
@@ -13,6 +15,6 @@ class Archive < ApplicationRecord
     # Query functions
 
     def self.archive_data
-        self.select(:id, :name, :token)
+        self.select(:id, :name, :token, :users_id)
     end
 end
