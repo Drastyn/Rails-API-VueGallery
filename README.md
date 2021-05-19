@@ -11,7 +11,7 @@ Use the fllow commands:
 
 Note: 
 
-    The register is not been created in the vue frontend.
-    You can use postman, for example, to create a new user.
+    The register is not created, you can register a new user
+    with rails console -> User.create(name: '', password: '')
 
     Use bundle exec figaro install (create application.yml for env variables)
