@@ -15,7 +15,7 @@ class Archive < ApplicationRecord
     # Query functions
 
     def self.archive_data
-        self.select(:id, :name, :token)
+        self.select(:id, :name, :token).order(created_at: :desc)
     end
 
     def self.uploaded_by

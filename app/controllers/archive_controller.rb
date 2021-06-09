@@ -5,7 +5,11 @@ class ArchiveController < ApplicationController
   def index
     @archives = Archive.archive_data.page(params[:page]).per(8).without_count
     .includes(image_attachment: :blob)
-    render json: @archives
+    render json: { 
+      data: ActiveModel::Serializer::CollectionSerializer.new(@archives, each_serializer: ArchiveSerializer),
+      next_page_url: @archives.next_page,
+      prev_page_url: @archives.prev_page
+    }
   end
 
   def show
@@ -30,7 +34,7 @@ class ArchiveController < ApplicationController
 
   def archive_params_new
     params.require(:archive).permit(:name, :image)
-    .with_defaults(token: Digest::MD5.hexdigest(Time.zone.to_s + params[:archive][:name]))
+    .with_defaults(token: Digest::MD5.hexdigest(Time.now.to_s + params[:archive][:name]))
   end
 
 end
