@@ -14,11 +14,15 @@ class Archive < ApplicationRecord
 
     # Query functions
 
-    def self.archive_data
-        self.select(:id, :name, :token).order(created_at: :desc)
+    def self.archives_data
+      self.select(:id, :name, :token).order(created_at: :desc)
+    end
+
+    def self.search_archives(param_search)
+      self.where("name LIKE :search", search: "%#{param_search.downcase}%")
     end
 
     def self.uploaded_by
-        self.select('users.name as user_name').joins(:user)
+      self.select('users.name as user_name').joins(:user)
     end
 end

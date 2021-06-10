@@ -1,15 +1,13 @@
-class ArchiveController < ApplicationController
+class ArchivesController < ApplicationController
+
+  include ArchivesHelper
 
   before_action :set_archive, only: [:show]
 
   def index
-    @archives = Archive.archive_data.page(params[:page]).per(8).without_count
+    @archives = Archive.archives_data.page(params[:page]).per(8).without_count
     .includes(image_attachment: :blob)
-    render json: { 
-      data: ActiveModel::Serializer::CollectionSerializer.new(@archives, each_serializer: ArchiveSerializer),
-      next_page_url: @archives.next_page,
-      prev_page_url: @archives.prev_page
-    }
+    set_response
   end
 
   def show
@@ -26,10 +24,16 @@ class ArchiveController < ApplicationController
     end
   end
 
+  def search
+    @archives = Archive.archives_data.search_archives(params[:search]).page(params[:page]).per(8).without_count
+    .includes(image_attachment: :blob)
+    set_response
+  end
+
   private
 
   def set_archive
-    @archive = Archive.archive_data.uploaded_by.find_by(token: params[:token])
+    @archive = Archive.archives_data.uploaded_by.find_by(token: params[:token])
   end
 
   def archive_params_new
