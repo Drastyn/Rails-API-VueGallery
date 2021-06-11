@@ -19,7 +19,7 @@ class Archive < ApplicationRecord
     end
 
     def self.search_archives(param_search)
-      self.where("name LIKE :search", search: "%#{param_search.downcase}%")
+      self.where("name LIKE :search", search: "%#{param_search.downcase}%").order(created_at: :desc)
     end
 
     def self.uploaded_by

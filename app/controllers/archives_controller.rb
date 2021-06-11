@@ -33,7 +33,7 @@ class ArchivesController < ApplicationController
   private
 
   def set_archive
-    @archive = Archive.archives_data.uploaded_by.find_by(token: params[:token])
+    @archive = Archive.archives_data.uploaded_by.find_by_token(params[:token])
   end
 
   def archive_params_new
